@@ -1,5 +1,5 @@
 sudo: required
 dist: trusty
 before_install:
-  - ./test/build.sh
+  - ./tests/build.sh
 language: python
