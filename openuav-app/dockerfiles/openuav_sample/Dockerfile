@@ -2,10 +2,10 @@ FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 MAINTAINER Jnaneshwar Das <jnaneshwar.das@gmail.com> / Matt Schmittle <schmttle@udel.edu> / Abhijeet Singh <abhsingh@seas.upenn.edu>
 
-RUN apt-get update && apt-get install -y apt-utils \
+RUN apt-get -q update && apt-get install -y -q apt-utils \
         git
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y -q --no-install-recommends \
         build-essential \
         curl \
         geographiclib-tools \
@@ -113,12 +113,12 @@ RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.profile && \
     echo "export GAZEBO_RESOURCE_PATH=:/root/src/Firmware/Tools/sitl_gazebo/media" >> ~/.profile && \
     echo "export PYTHONPATH=/root/catkin_ws/devel/lib/python2.7/dist-packages:/opt/ros/jade/lib/python2.7/dist-packages" >> ~/.profile
 RUN echo "installing ROS image packages"
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y -q --no-install-recommends \
         ros-kinetic-web-video-server \
         ros-kinetic-image-geometry \
         ros-kinetic-image-transport-plugins \
         ros-kinetic-image-proc 
-RUN apt-get install -y ros-kinetic-rosbridge-server ros-kinetic-opencv-apps ros-kinetic-tf2-geometry-msgs
+RUN apt-get install -q -y ros-kinetic-rosbridge-server ros-kinetic-opencv-apps ros-kinetic-tf2-geometry-msgs
 
 RUN cd ~/catkin_ws/src && \
     git clone https://github.com/RIVeR-Lab/apriltags_ros.git
@@ -133,13 +133,13 @@ RUN cd /home && \
 RUN sed -i '/force_color_prompt/s/^#//g' ~/.bashrc
 
 # for mavros global position in GPS to UTM conversions 
-RUN apt-get -y install ros-kinetic-geodesy
+RUN apt-get -y -q install ros-kinetic-geodesy
 RUN pip install dronekit 
 RUN pip install cherrypy
 RUN pip install dronekit_sitl
 
 ### Django set up to expose various states from the simulation container
-RUN apt-get -y install python3-pip
+RUN apt-get -y -q install python3-pip
 RUN pip3 --no-cache-dir install Django
 RUN mkdir /django 
 RUN django-admin startproject DjangoProject /django

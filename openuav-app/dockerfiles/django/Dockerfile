@@ -3,12 +3,12 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
-RUN apt-get update
+RUN apt-get -q update
 RUN pip install -r requirements.txt
-RUN apt-get install -y vim
-RUN apt-get install -y dnsutils
-RUN apt-get install -y postgresql-client-common 
-RUN apt-get install -y postgresql-client-9.6
+RUN apt-get install -y -q vim
+RUN apt-get install -y -q dnsutils
+RUN apt-get install -y -q postgresql-client-common
+RUN apt-get install -y -q postgresql-client-9.6
 
 # Not verified
 RUN django-admin.py startproject openuav .
