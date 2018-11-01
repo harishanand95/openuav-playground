@@ -2,6 +2,7 @@ FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 MAINTAINER Jnaneshwar Das <jnaneshwar.das@gmail.com> / Matt Schmittle <schmttle@udel.edu> / Abhijeet Singh <abhsingh@seas.upenn.edu>
 RUN pwd
+RUN ls
 RUN apt-get -qq update && apt-get install -y -qq apt-utils \
         git
 
